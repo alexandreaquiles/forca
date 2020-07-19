@@ -1,4 +1,5 @@
-(ns forca.core)
+(ns forca.core
+  (:require [clojure.string :as str]))
 
 (def total-de-vidas 6)
 (def palavra-secreta "MELANCIA")
@@ -15,7 +16,7 @@
 (defn acertou-a-palavra-toda? [palavra acertos]
   (empty? (letras-faltantes palavra acertos)))
 
-(defn le-letra! [] (read-line))
+(defn le-letra! [] (str/upper-case (read-line)))
 
 (defn acertou? [chute palavra] (.contains palavra chute))
 
