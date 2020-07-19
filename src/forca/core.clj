@@ -42,3 +42,7 @@
 
 (defn comeca-o-jogo []
   (jogo total-de-vidas palavra-secreta #{}))
+
+(defn -main [& args]
+  (println "Bem-vindo ao Jogo de Forca!")
+  (comeca-o-jogo))
