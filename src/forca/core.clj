@@ -1,12 +1,16 @@
 (ns forca.core)
 
 (def total-de-vidas 6)
+(def palavra-secreta "MELANCIA")
 
 (defn perdeu [] (print "Você perdeu"))
 (defn ganhou [] (print "Você ganhou!"))
 
+(defn ja-tem-letra? [acertos letra]
+  (contains? acertos (str letra)))
+
 (defn letras-faltantes [palavra acertos]
-  (remove (fn [letra] (contains? acertos (str letra))) palavra))
+  (remove (fn [letra] (ja-tem-letra? acertos letra)) palavra))
 
 (defn acertou-a-palavra-toda? [palavra acertos]
   (empty? (letras-faltantes palavra acertos)))
@@ -17,7 +21,7 @@
 
 (defn imprime-forca [vidas palavra acertos]
   (println "Vidas" vidas)
-  (println (reduce str (map (fn [letra] (if (contains? acertos (str letra))
+  (println (reduce str (map (fn [letra] (if (ja-tem-letra? acertos letra)
                                           (str letra " ")
                                           (str "_" " "))) palavra)))
   (println))
@@ -34,3 +38,6 @@
                   (do
                     (println "Errou a letra! Perdeu a vida!")
                     (recur (dec vidas) palavra acertos))))))
+
+(defn comeca-o-jogo []
+  (jogo total-de-vidas palavra-secreta #{}))
