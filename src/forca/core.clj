@@ -17,10 +17,9 @@
 
 (defn imprime-forca [vidas palavra acertos]
   (println "Vidas" vidas)
-  (doseq [letra (seq palavra)]
-    (if (contains? acertos (str letra))
-      (print letra " ")
-      (print "_" " ")))
+  (println (reduce str (map (fn [letra] (if (contains? acertos (str letra))
+                                          (str letra " ")
+                                          (str "_" " "))) palavra)))
   (println))
 
 (defn jogo [vidas palavra acertos]
